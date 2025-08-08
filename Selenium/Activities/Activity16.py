@@ -1,22 +1,37 @@
-class Car:
-    'This class represents a car'
+# Import webdriver from selenium
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 
-    def __init__(self, manufacturer, model, make, transmission, color):
-        self.manufacturer = manufacturer
-        self.model = model
-        self.make = make
-        self.transmission = transmission
-        self.color = color
+# Start the Driver
+with webdriver.Firefox() as driver:
+    # Navigate to the URL
+    driver.get("https://training-support.net/webelements/selects")
+    # Print the title of the page
+    print("Page title is: ", driver.title)
 
-    def accelerate(self):
-        print(self.manufacturer + " " + self.model + " has started moving")
+    # Find the dropdown
+    dropdown = driver.find_element(By.CSS_SELECTOR, "select.h-10")
+    # Pass the WebElement to the Select object
+    singleSelect = Select(dropdown)
 
-    def stop(self):
-        print(self.manufacturer + " " + self.model + " has stopped moving")
+    # Select the second option using visible text
+    singleSelect.select_by_visible_text("Two")
+    # Print the selected option
+    print("Second option: " + singleSelect.first_selected_option.text)
 
-car1 = Car("Toyota", "Corolla", "2015", "Manual", "White")
-car2 = Car("Maruti", "800", "2013", "Manual", "Red")
-car3 = Car("Suzuki", "Swift", "2017", "Automatic", "Black")
+    # Select the third option using index
+    singleSelect.select_by_index(3)
+    # Print the selected option
+    print("Third option: " + singleSelect.first_selected_option.text)
 
-car1.accelerate()
-car1.stop()
+    # Select the fourth option using value attribute
+    singleSelect.select_by_value("four")
+    # Print the selected option
+    print("Fourth option: " + singleSelect.first_selected_option.text)
+
+    # Print all the options
+    allOptions = singleSelect.options
+    print("Options in the dropdown: ")
+    for option in allOptions: 
+        print(option.text)
