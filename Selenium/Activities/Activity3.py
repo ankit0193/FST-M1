@@ -1,21 +1,19 @@
-p1 = input("player1,enter choice rock, paper or scissors: ").lower()
-p2 = input("player2,enter choice rock, paper or scissors: ").lower()
-if p1 == p2:
-    print("It's a tie!")
-elif p1 == 'rock':
-    if p2 == 'scissors':
-        print("p1 wins!")
-    else:
-        print("p2 wins!")
-elif p1 == 'scissors':
-    if p2 == 'paper':
-        print("p1 win!")
-    else:
-        print("p2 wins!")
-elif p1 == 'paper':
-    if p2 == 'rock':
-        print("p1 wins!")
-    else:
-        print("p2 win!")
-else:
-    print("Invalid input! You have not entered rock, paper or scissors, try again.")
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+with webdriver.Firefox() as driver:
+    
+    driver.get("https://training-support.net/webelements/login-form")
+    print("Page title is: ", driver.title)
+
+    username = driver.find_element(By.XPATH, "//input[@id='username']")
+    password = driver.find_element(By.XPATH, "//input[@id='password']")
+
+    username.send_keys("admin")
+    password.send_keys("password")
+
+    login = driver.find_element(By.XPATH, "//button[text()='Submit']")
+    login.click()
+
+    message = driver.find_element(By.XPATH, "//h1[contains(@class, 'text-center')]")
+    print("Login message: ", message.text)

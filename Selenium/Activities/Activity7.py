@@ -1,7 +1,12 @@
-numList =[10,90,30,20,40,70,80,50,60]
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
-sum =0
-for num in numList:
-    sum+=num
+with webdriver.Firefox() as driver:
 
-print(sum)
+    driver.get("https://training-support.net/webelements/dynamic-controls")
+    print("Page title is: ", driver.title)
+   
+    textbox = driver.find_element(By.ID, "textInput")
+    print("Textbox is enabled: ", textbox.is_enabled())
+    driver.find_element(By.ID, "textInputButton").click()
+    print("Textbox is enabled: ", textbox.is_enabled())

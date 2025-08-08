@@ -1,7 +1,9 @@
-name = input("Enter your name :")
-age = int(input("Enter your age :"))
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
-year_when_100 = 2025 + (100 - age)
-
-print(name + " will turn 100 in year" + str(year_when_100))
-print(name + " will turn 100 in year {}".format(year_when_100))
+with webdriver.Firefox() as driver:
+    
+    driver.get("https://training-support.net/")
+    print("Page title is: ", driver.title)
+    driver.find_element(By.LINK_TEXT, "About Us").click()
+    print("New page title is: ", driver.title)

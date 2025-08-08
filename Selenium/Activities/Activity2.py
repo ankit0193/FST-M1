@@ -1,6 +1,19 @@
-num = int(input("Enter a number :"))
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
-if num%2==0:
-    print("{} is even".format(num))
-else :
-    print("{} is odd".format(num))   
+
+with webdriver.Firefox() as driver:
+    
+    driver.get("https://training-support.net/webelements/login-form")
+    print("Page title is: ", driver.title) 
+    username = driver.find_element(By.ID, "username")
+    password = driver.find_element(By.ID, "password")
+
+    username.send_keys("admin")
+    password.send_keys("password")
+
+    login = driver.find_element(By.XPATH, "//button[text()='Submit']")
+    login.click()
+
+    message = driver.find_element(By.CSS_SELECTOR, "h1.text-center")
+    print("Login message: ", message.text)

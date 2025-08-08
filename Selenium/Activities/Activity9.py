@@ -1,18 +1,20 @@
-listOne = [1, 11, 22, 7, 18]
-listTwo = [90, 71, 25, 88, 12]
+from selenium import webdriver
+from selenium.webdriver import Keys, ActionChains
+from selenium.webdriver.common.by import By
 
-print("First List ", listOne)
-print("Second List ", listTwo)
+# Start the Driver
+with webdriver.Firefox() as driver:
+    # Declare the actions variable
+    actions = ActionChains(driver)
+    # Navigate to the URL
+    driver.get("https://training-support.net/webelements/keyboard-events")
 
-thirdList = []
+    # Print the title of the page
+    print("Page title is: ", driver.title)
 
-for num in listOne:
-    if (num % 2 != 0):
-        thirdList.append(num)
-
-for num in listTwo:
-    if (num % 2 == 0):
-        thirdList.append(num)
-
-print("result List is:")
-print(thirdList)
+    # Press the key
+    actions.send_keys("This is coming from Selenium").send_keys(Keys.RETURN).perform()
+    
+    # Print the message from the page
+    pageText = driver.find_element(By.CSS_SELECTOR, "h1.mt-3").text
+    print(pageText)
