@@ -26,7 +26,7 @@ public class GithubProject {
     	requestSpec = new RequestSpecBuilder().
     			setBaseUri("https://api.github.com/users/keys").
     			addHeader("Content-Type","application/json").
-    			addHeader("Authorization","token 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").
+    			addHeader("Authorization","token ***").
     			addHeader("X-GitHub-Api-Version", "2022-11-28").
     			build();
     	
@@ -64,3 +64,4 @@ public class GithubProject {
     	statusCode(204);
     }
 }
+
